@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I9 Soluções - Sistema de Estoque</title>
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="~/Vendor/sweetalert/css/sweetalert.css">
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/toastr/toastr.min.js"></script>
+    <script src="~/Vendor/sweetalert/js/sweetalert.min.js"></script>
+    <script src="~/Scripts/global.js"></script>
+
+
+</head>
+<body>
+    <!-- MENU -->
+
+    <header>
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/home/index">Início</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong>Produto</strong></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="produto/index">Cadastro de produto</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong>Administração</strong></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="usuarios/index">Cadastro de usuário</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong>Fornecedores</strong></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="fornecedor/index">Cadastro de fornecedores</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong>Vendas</strong></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="venda/vender">Realizar venda</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- END MENU -->
+@RenderBody()
+</body>
+</html>
