@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I9 Soluções - Sistema de Estoque</title>
+    <title>Professor Ricardo Oliveira</title>
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="~/Vendor/sweetalert/css/sweetalert.css">
     @Scripts.Render("~/bundles/modernizr")
@@ -13,55 +13,95 @@
     <script src="~/Scripts/toastr/toastr.min.js"></script>
     <script src="~/Vendor/sweetalert/js/sweetalert.min.js"></script>
     <script src="~/Scripts/global.js"></script>
-
+    <script src="~/Scripts/Home/Validacao.js"></script>
 
 </head>
 <body>
     <!-- MENU -->
 
-    <header>
-        <div class="navbar navbar-default navbar-static-top">
+    <header class="top-navbar">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
+<a class="navbar-brand" href="index.html">
+<img src="Content/images/logo.png" alt="" />
+</a>
+				<button type = "button" class="navbar-toggle" data-toggle = "collapse" data-target = "#menu">
+					<span class = "icon-bar"></span>
+					<span class = "icon-bar"></span>
+					<span class = "icon-bar"></span>					
+</button>
+<div class="navbar-collapse collapse" id="menu">
                     <ul class="nav navbar-nav">
-                        <li><a href="/home/index">Início</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong>Produto</strong></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="produto/index">Cadastro de produto</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong>Administração</strong></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="usuarios/index">Cadastro de usuário</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong>Fornecedores</strong></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="fornecedor/index">Cadastro de fornecedores</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong>Vendas</strong></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="venda/vender">Realizar venda</a></li>
-                            </ul>
-                        </li>
+                        <li class="nav-item"><a href="/home/index">Início</a></li>
+                        <li class="nav-item"><a href="/home/sobre">Quem somos</a></li>
+                        <li class="nav-item"><a href="/home/cursos">Cursos</a></li>
+                        <li class="nav-item"><a href="/cadastro/index">Cadastre-se</a></li>
                     </ul>
                 </div>
             </div>
-        </div>
+</nav>
     </header>
     <!-- END MENU -->
+<div class="container">
+<div class="row">
+<div class="col-lg-4">
+		<h1>Entre para Acessar Seus Cursos</h1>
+</div>
+<div class="col-lg-4">
+<p>Não tem cadastro em nossa plataforma?
+<a class="btn-link" href="/cadastro/index">Clique aqui para se Cadastrar</a>
+</div>
+<div class="col-lg-4">
+		<form name="formLogin" id="formLogin" class="form-inline">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="form-group">
+						<label class="label-control">E-mail</label>
+						<input type="form-control" type="email" name="email" id="email">
+					</div>
+				</div>
+
+				<div class="col-lg-6">
+					<div class="form-group">
+						<label class="label-control">Senha</label>
+						<input class="form-control" type="password" name="senha" id="senha">
+					</div>
+				</div>
+				<input type="button" id="btnEntrar" value="Ok" onclick="validarLogin()" />
+
+			</div>
+		</form>
+	</div>
+</div>
+</div>
 @RenderBody()
+	<footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                            <h3>Professor Ricardo Oliveira</h3>
+                        <p>Levando ensino de qualidade a pessoas cegas e com baixa visão.</p>
+                </div><!-- end col -->
+                <div class="col-lg-3 col-md-6 col-xs-12">
+                            <h3>Minhas Redes Sociais</h3>
+                        <ul class="footer-links social-md">
+<li><a class="btn-link"><a href="https://www.youtube.com/channel/UCHDXUE36jlTMhNDaLGteNww?view_as=subscriber" target="_blank">Canal Visão de DEV no Youtube</a></li>
+<li><a class="btn-link"><a href="https://www.linkedin.com/in/jos%C3%A9-ricardo-gomes-de-oliveira-j%C3%BAnior-069a01b7/" target="_blank">Linkedin</a>
+                        </ul><!-- end links -->
+                </div><!-- end col -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </footer><!-- end footer -->
+
+<div class="copyrights">
+<div class="container">
+<div class="footer-distributed">
+<div class="footer-left">
+<p class="footer-company-name">Todos os direitos Reservados &copy;Professor Ricardo Oliveira @DateTime.Now.Year</p>
+</div>
+</div>
+</div><!-- end container -->
+</div><!-- end copyrights -->
+    <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
 </body>
 </html>
