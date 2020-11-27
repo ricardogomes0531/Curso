@@ -6,7 +6,7 @@ var sexo=$("#sexo").val();
 var mail=$("#mail").val();
 var celular=$("#celular").val();
 var whatsapp=$("#whatsapp").val();
-var senha=$("#senha").val();
+var senha=$("#criarSenha").val();
 var confirmarSenha=$("#confirmarSenha").val();
 if (nome=="")
 {toastr.info("Por favor preencher o campo nome.","Atenção");
@@ -29,13 +29,12 @@ return;}
 else if (whatsapp=="")
 {toastr.info("Por favor nos informe se seu celular também é Whatsapp.","Atenção");
 return;}
-
 else if (senha!=confirmarSenha)
 {toastr.info("As senhas digitadas não conferem.","Atenção");
 return;}
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: "/Cadastro/Salvar",
         async: true,
         datatype: "html",
@@ -46,16 +45,17 @@ cpf: cpf,
 sexo: sexo,
 email: mail,
 celular: celular,
-whatsapp: whatsapp
+whatsapp: whatsapp,
+senha: senha
 },
         success: function (data) {
-if (!data)
-{toastr.info("Erro ao realizar cadastro."+data,"Atenção");}
+if (data.ExisteErro)
+{toastr.info(data.Mensagem,"Atenção");}
 else
 {
                 swal({
                     title: "Êxito",
-                    text: "Cadastro realizado com sucesso. Você será redirecionado para a página inicial, onde será possível fazer seu login com o e-mail e senha cadastrados.",
+                    text: data.Mensagem,
                     icon: "info"
                 }).then(() => { document.location.href = "/Home"; });
             }

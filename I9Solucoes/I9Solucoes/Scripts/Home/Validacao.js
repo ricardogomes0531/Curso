@@ -18,7 +18,8 @@ return;}
                 toastr.info("E-mail ou senha inválidos", "Atenção");
             }
             else {
-                document.location.href = "Estoque";
+document.cookie="login="+email;
+                document.location.href = "MeusCursos";
                         }
             }
         });

@@ -16,20 +16,35 @@ namespace I9Solucoes.Controllers
             return View();
         }
 
-
+        [HttpPost]
         public JsonResult Salvar()
         {
             CadastroRepository cadastro = new CadastroRepository();
             bool resultado = false;
+            Erro erro = new Erro();
             try
             {
-                                resultado = cadastro.Inserir(Request.QueryString["nome"].ToString(), Convert.ToDateTime(Request.QueryString["dataNascimento"].ToString()), Request.QueryString["cpf"].ToString(), Request.QueryString["sexo"].ToString(), Request.QueryString["email"].ToString(), Request.QueryString["celular"].ToString(), Request.QueryString["whatsapp"].ToString(), Request.QueryString["senha"].ToString());
+                resultado = cadastro.Inserir(Request.Form["nome"].ToString(), Convert.ToDateTime(Request.Form["dataNascimento"].ToString()), Request.Form["cpf"].ToString(), Request.Form["sexo"].ToString(), Request.Form["email"].ToString(), Request.Form["celular"].ToString(), Request.Form["whatsapp"].ToString(), Request.Form["senha"].ToString());
+                if (resultado)
+                {
+                    erro.Mensagem = "Cadastro realizado com sucesso";
+                    erro.Detalhe = null;
+                    erro.ExisteErro =false;
+                }
+                else
+                {
+                    erro.Mensagem = "Erro ao realizar o cadastro.";
+                    erro.Detalhe = null;
+                    erro.ExisteErro = true;
+                }
             }
             catch (Exception ex)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                erro.Mensagem = "Erro ao realizar cadastro " + ex.Message;
+                erro.Detalhe = ex.Message;
+                erro.ExisteErro = true;
             }
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+                        return Json(erro, JsonRequestBehavior.AllowGet);
         }
     }
 }
