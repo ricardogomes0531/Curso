@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using I9Solucoes.Repositorios;
 using I9Solucoes.Models;
+using I9Solucoes.Filtro;
 
 namespace I9Solucoes.Controllers
 {
@@ -19,6 +20,13 @@ namespace I9Solucoes.Controllers
 		public ActionResult Logar(string email, string senha)
 		{
 			var resultado = new UsuarioRepository().Autenticar(email, senha);
+			if (resultado)
+			{
+				HttpCookie cookieLogin = new HttpCookie("login");
+				//cookieLogin.Secure = true;
+				cookieLogin.Value = email;
+				Response.Cookies.Add(cookieLogin);
+			}
 			return Json(resultado,JsonRequestBehavior.AllowGet);
 		}
 
@@ -35,6 +43,14 @@ namespace I9Solucoes.Controllers
 				return Json(ex.Message, JsonRequestBehavior.AllowGet);
 			}
 			return Json(cursos,JsonRequestBehavior.AllowGet);
+		}
+
+		[PermissoesFilters]
+		public ActionResult MeusCursos()
+		{
+			HttpCookie cookieLogin = Request.Cookies["login"];
+			ViewBag.login = cookieLogin.Value.ToString();
+			return View();
 		}
 
 	}

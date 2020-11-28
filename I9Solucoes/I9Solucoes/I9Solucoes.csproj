@@ -123,6 +123,7 @@
     <Compile Include="Controllers\CadastroController.cs" />
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filtros\PermissoesFilters.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,6 +189,7 @@
     <Content Include="SQL\i9solucoes.bak" />
     <Content Include="Views\Curso\Detalhe.cshtml" />
     <Content Include="Views\Cadastro\Index.cshtml" />
+    <Content Include="Views\Home\MeusCursos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
