@@ -18,8 +18,7 @@ return;}
                 toastr.info("E-mail ou senha inválidos", "Atenção");
             }
             else {
-document.cookie="login="+email;
-                document.location.href = "MeusCursos";
+                document.location.href = "home/MeusCursos";
                         }
             }
         });

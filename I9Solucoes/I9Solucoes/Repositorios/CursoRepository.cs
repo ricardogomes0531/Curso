@@ -134,10 +134,10 @@ namespace I9Solucoes.Repositorios
 					Id = dados.GetInt32(dados.GetOrdinal("Id")),
 					Nome = dados.GetString(dados.GetOrdinal("Nome")),
 					TempoPrevistoDuracao = dados.GetInt32(dados.GetOrdinal("TempoPrevistoDuracao")),
-					 ValorMonetario=dados.GetDecimal(dados.GetOrdinal("ValorMonetario")),
-					  Explicacao=dados.GetString(dados.GetOrdinal("Explicacao"))
+					ValorMonetario = dados.GetDecimal(dados.GetOrdinal("ValorMonetario")),
+					Explicacao = dados.GetString(dados.GetOrdinal("Explicacao"))
 				};
-retorno.Add(curso);
+				retorno.Add(curso);
 			}
 			return retorno;
 		}
@@ -150,7 +150,7 @@ retorno.Add(curso);
 			SqlParameter idParametro = new SqlParameter()
 			{
 				ParameterName = "@id",
-				 SqlDbType=SqlDbType.Int,
+				SqlDbType = SqlDbType.Int,
 				Value = id
 			};
 			query.Parameters.Add(idParametro);
@@ -171,5 +171,56 @@ retorno.Add(curso);
 			return retorno;
 		}
 
+		public List<CursoAluno> ListarCursosDoAluno(string email)
+		{
+			List<CursoAluno> cursos = new List<CursoAluno>();
+			SqlCommand query = new SqlCommand("select c.Nome, ac.SnLiberado, ac.DataCadastro, ac.IdCurso from curso c, aluno_curso ac, usuario u where c.id=ac.IdCurso and ac.IdAluno=u.id and u.email=@email", _conexao);
+			_conexao.Open();
+			SqlParameter parametroEmail = new SqlParameter()
+			{
+				ParameterName = "@email",
+				SqlDbType = SqlDbType.VarChar,
+				Value = email
+			};
+			query.Parameters.Add(parametroEmail);
+			SqlDataReader dados = query.ExecuteReader();
+			while (dados.Read())
+			{
+				CursoAluno curso = new CursoAluno()
+				{
+					DataCadastro = dados.GetDateTime(dados.GetOrdinal("DataCadastro")),
+					IdCurso = dados.GetInt32(dados.GetOrdinal("IdCurso")),
+					Liberado = dados.GetString(dados.GetOrdinal("SnLiberado")),
+					NomeCurso = dados.GetString(dados.GetOrdinal("Nome")),
+				};
+				cursos.Add(curso);
+			};
+			return cursos;
+		}
+
+		public List<Modulos> ListarModulosDoCurso(int idCurso)
+		{
+			List<Modulos> modulos = new List<Modulos>();
+			SqlCommand query = new SqlCommand("select Id, Nome from dbo.modulo_curso where IdCurso=@idCurso", _conexao);
+			_conexao.Open();
+			SqlParameter parametroIdCurso = new SqlParameter()
+			{
+				ParameterName = "@idCurso",
+				SqlDbType = SqlDbType.Int,
+				Value = idCurso
+			};
+			query.Parameters.Add(parametroIdCurso);
+			SqlDataReader dados = query.ExecuteReader();
+			while (dados.Read())
+			{
+				Modulos modulo = new Modulos()
+				{
+					Id = dados.GetInt32(dados.GetOrdinal("Id")),
+					Nome = dados.GetString(dados.GetOrdinal("Nome"))
+				};
+				modulos.Add(modulo);
+			};
+			return modulos;
+		}
 	}
 }

@@ -48,9 +48,10 @@ namespace I9Solucoes.Controllers
 		[PermissoesFilters]
 		public ActionResult MeusCursos()
 		{
+			List<CursoAluno> cursos = new List<CursoAluno>();
 			HttpCookie cookieLogin = Request.Cookies["login"];
-			ViewBag.login = cookieLogin.Value.ToString();
-			return View();
+			cursos = new CursoRepository().ListarCursosDoAluno(cookieLogin.Value.ToString());
+			return View(cursos);
 		}
 
 	}

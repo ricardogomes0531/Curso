@@ -5,11 +5,22 @@ using System.Web;
 using System.Web.Mvc;
 using I9Solucoes.Repositorios;
 using I9Solucoes.Models;
+using I9Solucoes.Filtro;
 
 namespace I9Solucoes.Controllers
 {
     public class CursoController : Controller
     {
+
+[PermissoesFilters]
+        public ActionResult Index(int idCurso)
+        {
+            List<Modulos> modulos = new List<Modulos>();
+            modulos = new CursoRepository().ListarModulosDoCurso(idCurso);
+
+            return View(modulos);
+        }
+
         [HttpGet]
         public ActionResult Detalhe(int id)
         {
