@@ -201,7 +201,7 @@ namespace I9Solucoes.Repositorios
 		public List<Modulos> ListarModulosDoCurso(int idCurso)
 		{
 			List<Modulos> modulos = new List<Modulos>();
-			SqlCommand query = new SqlCommand("select Id, Nome from dbo.modulo_curso where IdCurso=@idCurso", _conexao);
+			SqlCommand query = new SqlCommand("select Id, Nome, IdCurso from dbo.modulo_curso where IdCurso=@idCurso", _conexao);
 			_conexao.Open();
 			SqlParameter parametroIdCurso = new SqlParameter()
 			{
@@ -216,11 +216,50 @@ namespace I9Solucoes.Repositorios
 				Modulos modulo = new Modulos()
 				{
 					Id = dados.GetInt32(dados.GetOrdinal("Id")),
-					Nome = dados.GetString(dados.GetOrdinal("Nome"))
+					Nome = dados.GetString(dados.GetOrdinal("Nome")),
+					 IdCurso=dados.GetInt32(dados.GetOrdinal("IdCurso"))
 				};
 				modulos.Add(modulo);
 			};
 			return modulos;
 		}
+
+		public List<Aulas> ListarAulasDoModulo(int idCurso, int idModulo)
+		{
+			List<Aulas> aulas = new List<Aulas>();
+			SqlCommand query = new SqlCommand("select Id, IdCurso, IdModulo, Nome, ConteudoAula, CaminhoArquivo from aula_modulo_curso where IdCurso=@idCurso and IdModulo=@idModulo", _conexao);
+			_conexao.Open();
+			SqlParameter parametroIdCurso = new SqlParameter()
+			{
+				ParameterName = "@idCurso",
+				SqlDbType = SqlDbType.Int,
+				Value = idCurso
+			};
+			SqlParameter parametroIdModulo = new SqlParameter()
+			{
+				ParameterName = "@idModulo",
+				SqlDbType = SqlDbType.Int,
+				Value = idModulo
+			};
+
+			query.Parameters.Add(parametroIdCurso);
+			query.Parameters.Add(parametroIdModulo);
+			SqlDataReader dados = query.ExecuteReader();
+			while (dados.Read())
+			{
+				Aulas aula = new Aulas()
+				{
+					 CaminhoArquivo=dados.IsDBNull(dados.GetOrdinal("CaminhoArquivo"))? null : dados.GetString(dados.GetOrdinal("CaminhoArquivo")),
+					  ConteudoAula=dados.IsDBNull(dados.GetOrdinal("ConteudoAula"))? null : dados.GetString(dados.GetOrdinal("ConteudoArquivo")),
+					Id = dados.GetInt32(dados.GetOrdinal("Id")),
+					IdCurso = dados.GetInt32(dados.GetOrdinal("IdCurso")),
+					IdModulo = dados.GetInt32(dados.GetOrdinal("IdModulo")),
+					Nome = dados.GetString(dados.GetOrdinal("Nome"))
+				};
+				aulas.Add(aula);
+			};
+			return aulas;
+		}
+
 	}
 }

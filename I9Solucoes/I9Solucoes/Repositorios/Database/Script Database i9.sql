@@ -17,6 +17,9 @@ insert into modulo_curso(idcurso, nome) values(1, 'introdução')
 
 insert into modulo_curso(idcurso, nome) values(1, 'Estruturas condicionais')
 
+	IF OBJECT_ID('dbo.aula_modulo_curso') is null
+create table aula_modulo_curso(Id int identity primary key, IdCurso int, IdModulo int, Nome varchar(50, ConteudoAula varchar(max), CaminhoArquivo varchar(50))
+insert into aula_modulo_curso(idcurso, idmodulo, Nome, conteudoaula, caminhoarquivo) values(1, 1, 'Aula 01', 'PHP é uma linguagem de programação interpretada.', '')
 
 	IF OBJECT_ID('dbo.produto') is null
 create table produto(Id int identity primary key,  IdFornecedor int not null, DataCadastro date not null, DataAlteracao date, UsuarioCadastro varchar(50) not null, UsuarioAlteracao varchar(50), EstoqueMinimo int, DataValidade date, Custo decimal not null, CustoVenda decimal not null, PrazoEntregaFornecedor int, Localizacao varchar(200), Marca varchar(50),

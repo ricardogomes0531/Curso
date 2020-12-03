@@ -13,7 +13,7 @@
 			<ul class="list-group"></ul>
 			foreach (var modulos in Model.ToList())
 			{
-				<li class="list-group-item"><a class="btn-link" href="/Curso/Aulas/?idModulo=@modulos.Id">@modulos.Nome</a></li>
+				<li class="list-group-item"><a class="btn-link" href="/Curso/Aulas/?idModulo=@modulos.Id&idCurso=@modulos.IdCurso">@modulos.Nome</a></li>
 								}
 		}
 			</ul>
