@@ -250,7 +250,7 @@ namespace I9Solucoes.Repositorios
 				Aulas aula = new Aulas()
 				{
 					 CaminhoArquivo=dados.IsDBNull(dados.GetOrdinal("CaminhoArquivo"))? null : dados.GetString(dados.GetOrdinal("CaminhoArquivo")),
-					  ConteudoAula=dados.IsDBNull(dados.GetOrdinal("ConteudoAula"))? null : dados.GetString(dados.GetOrdinal("ConteudoArquivo")),
+					  ConteudoAula=dados.IsDBNull(dados.GetOrdinal("ConteudoAula"))? null : dados.GetString(dados.GetOrdinal("ConteudoAula")),
 					Id = dados.GetInt32(dados.GetOrdinal("Id")),
 					IdCurso = dados.GetInt32(dados.GetOrdinal("IdCurso")),
 					IdModulo = dados.GetInt32(dados.GetOrdinal("IdModulo")),

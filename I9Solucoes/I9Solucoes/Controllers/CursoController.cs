@@ -29,5 +29,13 @@ namespace I9Solucoes.Controllers
 
             return View(curso);
         }
+
+        public ActionResult ListarAulas(int idCurso, int idModulo)
+        {
+            List<Aulas> aulas = new List<Aulas>();
+            aulas = new CursoRepository().ListarAulasDoModulo(idCurso, idModulo);
+            return View(aulas);
+        }
+
     }
 }
