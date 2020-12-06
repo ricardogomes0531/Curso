@@ -195,6 +195,7 @@
     <Content Include="Views\Home\MeusCursos.cshtml" />
     <Content Include="Views\Curso\Index.cshtml" />
     <Content Include="Views\Curso\ListarAulas.cshtml" />
+    <Content Include="Views\Curso\AssistirAula.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

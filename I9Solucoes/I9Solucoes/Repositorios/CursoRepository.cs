@@ -217,7 +217,7 @@ namespace I9Solucoes.Repositorios
 				{
 					Id = dados.GetInt32(dados.GetOrdinal("Id")),
 					Nome = dados.GetString(dados.GetOrdinal("Nome")),
-					 IdCurso=dados.GetInt32(dados.GetOrdinal("IdCurso"))
+					IdCurso = dados.GetInt32(dados.GetOrdinal("IdCurso"))
 				};
 				modulos.Add(modulo);
 			};
@@ -249,8 +249,8 @@ namespace I9Solucoes.Repositorios
 			{
 				Aulas aula = new Aulas()
 				{
-					 CaminhoArquivo=dados.IsDBNull(dados.GetOrdinal("CaminhoArquivo"))? null : dados.GetString(dados.GetOrdinal("CaminhoArquivo")),
-					  ConteudoAula=dados.IsDBNull(dados.GetOrdinal("ConteudoAula"))? null : dados.GetString(dados.GetOrdinal("ConteudoAula")),
+					CaminhoArquivo = dados.IsDBNull(dados.GetOrdinal("CaminhoArquivo")) ? null : dados.GetString(dados.GetOrdinal("CaminhoArquivo")),
+					ConteudoAula = dados.IsDBNull(dados.GetOrdinal("ConteudoAula")) ? null : dados.GetString(dados.GetOrdinal("ConteudoAula")),
 					Id = dados.GetInt32(dados.GetOrdinal("Id")),
 					IdCurso = dados.GetInt32(dados.GetOrdinal("IdCurso")),
 					IdModulo = dados.GetInt32(dados.GetOrdinal("IdModulo")),
@@ -259,6 +259,42 @@ namespace I9Solucoes.Repositorios
 				aulas.Add(aula);
 			};
 			return aulas;
+		}
+
+		public string MostrarConteudoDaAula(int idCurso, int idModulo, int idAula)
+		{
+			string conteudoAula = string.Empty;
+			SqlCommand query = new SqlCommand("select ConteudoAula from dbo.aula_modulo_curso where IdCurso=@idCurso and IdModulo=@idModulo and Id=@idAula", _conexao);
+			_conexao.Open();
+			SqlParameter parametroIdCurso = new SqlParameter()
+			{
+				ParameterName = "@idCurso",
+				SqlDbType = SqlDbType.Int,
+				Value = idCurso
+			};
+
+			SqlParameter parametroIdModulo = new SqlParameter()
+			{
+				ParameterName = "@idModulo",
+				SqlDbType = SqlDbType.Int,
+				Value = idModulo
+			};
+
+			SqlParameter parametroIdAula = new SqlParameter()
+			{
+				ParameterName = "@idAula",
+				SqlDbType = SqlDbType.Int,
+				Value = idAula
+			};
+
+			query.Parameters.Add(parametroIdCurso);
+			query.Parameters.Add(parametroIdModulo);
+			query.Parameters.Add(parametroIdAula);
+
+			SqlDataReader dado = query.ExecuteReader();
+			if (dado.Read())
+				conteudoAula = dado.GetString(dado.GetOrdinal("ConteudoAula"));
+			return conteudoAula;
 		}
 
 	}

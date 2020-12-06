@@ -37,5 +37,12 @@ namespace I9Solucoes.Controllers
             return View(aulas);
         }
 
+        public ActionResult AssistirAula(int idCurso, int idModulo, int idAula)
+        {
+            string conteudoAula = new CursoRepository().MostrarConteudoDaAula(idCurso, idModulo, idAula);
+            ViewBag.conteudoAula = conteudoAula;
+            return View();
+        }
+
     }
 }
