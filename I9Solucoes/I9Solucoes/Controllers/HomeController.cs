@@ -13,7 +13,8 @@ namespace I9Solucoes.Controllers
 	{
 		public ActionResult Index()
 		{
-			return View();
+			ViewBag.totalVisitantesOnline = System.Web.HttpContext.Current.Application["totalVisitantesOnline"];
+						return View();
 		}
 
 		[HttpPost]

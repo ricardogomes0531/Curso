@@ -9,28 +9,35 @@ var whatsapp=$("#whatsapp").val();
 var senha=$("#criarSenha").val();
 var confirmarSenha=$("#confirmarSenha").val();
 if (nome=="")
-{toastr.info("Por favor preencher o campo nome.","Atenção");
+{$("#alerta").html("<span>Favor preencher o campo nome.</span>");
 return;}
 else if (dataNascimento=="")
-{toastr.info("Por favor preencher o campo data de nascimento.","Atenção");
+{$("#alerta").html("<span>Favor preencher o campo data de nascimento.</span>");
 return;}
 else if (cpf=="")
-{toastr.info("Por favor preencher o campo CPF.","Atenção");
+{$("#alerta").html("<span>Favor preencher o campo CPF.</span>");
 return;}
 else if (sexo=="")
-{toastr.info("Por favor preencher o campo sexo.","Atenção");
+{$("#alerta").html("<span>Favor preencher o campo sexo.</span>");
 return;}
 else if (mail=="")
-{toastr.info("Por favor preencher o campo e-mail.","Atenção");
+{$("#alerta").html("<span>Favor preencher o campo e-mail.</span>");
 return;}
 else if (celular=="")
-{toastr.info("Por favor preencher o campo celular.","Atenção");
+{$("#alerta").html("<span>Favor preencher o campo celular.</span>");
 return;}
 else if (whatsapp=="")
-{toastr.info("Por favor nos informe se seu celular também é Whatsapp.","Atenção");
+{$("#alerta").html("<span>Favor preencher o campo informando se seu celular é ou não é Whatsapp.</span>");
 return;}
 else if (senha!=confirmarSenha)
-{toastr.info("As senhas digitadas não conferem.","Atenção");
+{$("#alerta").html("<span>As senhas digitadas não são iguais.</span>");
+return;}
+
+else if (senha=="")
+{$("#alerta").html("<span>Preencher a senha.</span>");
+return;}
+else if (confirmarSenha=="")
+{$("#alerta").html("<span>Preencher a confirmação da senha.</span>");
 return;}
 
     $.ajax({
@@ -50,7 +57,7 @@ senha: senha
 },
         success: function (data) {
 if (data.ExisteErro)
-{toastr.info(data.Mensagem,"Atenção");}
+{$("#alerta").html("<span>"+data.mensagem+"</span>")}
 else
 {
                 swal({
