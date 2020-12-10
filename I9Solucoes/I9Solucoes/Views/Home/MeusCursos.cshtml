@@ -12,19 +12,31 @@
 		{
 			foreach (var cursos in Model.ToList())
 			{
-		<p class="text-lead">
-			<b>Nome do curso: @cursos.NomeCurso</b>
-			<br />
-			<b>Iniciado em: @cursos.DataCadastro</b>
-			<br />
-<a href="/Curso/?idCurso=@cursos.IdCurso">Ir para o curso</a>
-		</p>
+				<p class="text-lead">
+					<b>Nome do curso: @cursos.NomeCurso</b>
+					<br />
+					<b>Iniciado em: @cursos.DataCadastro</b>
+					<br />
+					@if (DateTime.Now >= cursos.DataInicio)
+					{
+						<a href="/Curso/?idCurso=@cursos.IdCurso">Ir para o curso</a>
+					}
+					@if (DateTime.Now < cursos.DataInicio)
+					{
+					<p class="text-lead">O curso ainda não iniciou. A data de início é @cursos.DataInicio.ToString("dd/mm/yyyy")</p>
+				}
+					@if (DateTime.Now > cursos.DataFim)
+					{
+						<p class="text-lead">O curso já encerrou.</p>
+					}
+
+					</p>
+				}
 			}
-		}
-		else
-		{
-		<p class="text-lead">Você ainda não está incrito em nenhum curso.</p>
-		}
+			else
+			{
+				<p class="text-lead">Você ainda não está incrito em nenhum curso.</p>
+			}
 	</div>
 </div>
 </section>

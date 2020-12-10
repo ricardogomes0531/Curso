@@ -8,5 +8,8 @@ namespace I9Solucoes.Models
 		public string NomeCurso { get; set; }
 		public DateTime DataCadastro { get; set; }
 				public string Liberado { get; set; }
+		public DateTime DataInicio { get; set; }
+		public DateTime DataFim { get; set; }
+
 	}
 }

@@ -174,7 +174,7 @@ namespace I9Solucoes.Repositorios
 		public List<CursoAluno> ListarCursosDoAluno(string email)
 		{
 			List<CursoAluno> cursos = new List<CursoAluno>();
-			SqlCommand query = new SqlCommand("select c.Nome, ac.SnLiberado, ac.DataCadastro, ac.IdCurso from curso c, aluno_curso ac, usuario u where c.id=ac.IdCurso and ac.IdAluno=u.id and u.email=@email", _conexao);
+			SqlCommand query = new SqlCommand("select c.Nome, ac.SnLiberado, ac.DataCadastro, ac.IdCurso, c.DataInicio, ac.Datafim from curso c, aluno_curso ac, usuario u where c.id=ac.IdCurso and ac.IdAluno=u.id and u.email=@email", _conexao);
 			_conexao.Open();
 			SqlParameter parametroEmail = new SqlParameter()
 			{
@@ -192,6 +192,8 @@ namespace I9Solucoes.Repositorios
 					IdCurso = dados.GetInt32(dados.GetOrdinal("IdCurso")),
 					Liberado = dados.GetString(dados.GetOrdinal("SnLiberado")),
 					NomeCurso = dados.GetString(dados.GetOrdinal("Nome")),
+					 DataFim=dados.GetDateTime(dados.GetOrdinal("DataFim")),
+					  DataInicio=dados.GetDateTime(dados.GetOrdinal("DataInicio"))
 				};
 				cursos.Add(curso);
 			};
@@ -295,6 +297,42 @@ namespace I9Solucoes.Repositorios
 			if (dado.Read())
 				conteudoAula = dado.GetString(dado.GetOrdinal("ConteudoAula"));
 			return conteudoAula;
+		}
+
+		public string PegarCaminhoDoArquivoMp3(int idCurso, int idModulo, int idAula)
+		{
+			string caminhoArquivo = string.Empty;
+			SqlCommand query = new SqlCommand("select CaminhoArquivo from dbo.aula_modulo_curso where IdCurso=@idCurso and IdModulo=@idModulo and Id=@idAula", _conexao);
+			_conexao.Open();
+			SqlParameter parametroIdCurso = new SqlParameter()
+			{
+				ParameterName = "@idCurso",
+				SqlDbType = SqlDbType.Int,
+				Value = idCurso
+			};
+
+			SqlParameter parametroIdModulo = new SqlParameter()
+			{
+				ParameterName = "@idModulo",
+				SqlDbType = SqlDbType.Int,
+				Value = idModulo
+			};
+
+			SqlParameter parametroIdAula = new SqlParameter()
+			{
+				ParameterName = "@idAula",
+				SqlDbType = SqlDbType.Int,
+				Value = idAula
+			};
+
+			query.Parameters.Add(parametroIdCurso);
+			query.Parameters.Add(parametroIdModulo);
+			query.Parameters.Add(parametroIdAula);
+
+			SqlDataReader dado = query.ExecuteReader();
+			if (dado.Read())
+				caminhoArquivo = dado.GetString(dado.GetOrdinal("CaminhoArquivo"));
+			return caminhoArquivo;
 		}
 
 	}

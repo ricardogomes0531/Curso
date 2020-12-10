@@ -143,6 +143,7 @@
     <Compile Include="Repositorios\UsuarioRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\audio.mp3" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -196,6 +197,7 @@
     <Content Include="Views\Curso\Index.cshtml" />
     <Content Include="Views\Curso\ListarAulas.cshtml" />
     <Content Include="Views\Curso\AssistirAula.cshtml" />
+    <Content Include="Views\Curso\AssistirAulaMp3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -30,6 +30,7 @@ namespace I9Solucoes.Controllers
             return View(curso);
         }
 
+[PermissoesFilters]
         public ActionResult ListarAulas(int idCurso, int idModulo)
         {
             List<Aulas> aulas = new List<Aulas>();
@@ -37,6 +38,7 @@ namespace I9Solucoes.Controllers
             return View(aulas);
         }
 
+[PermissoesFilters]
         public ActionResult AssistirAula(int idCurso, int idModulo, int idAula)
         {
             string conteudoAula = new CursoRepository().MostrarConteudoDaAula(idCurso, idModulo, idAula);
@@ -44,5 +46,12 @@ namespace I9Solucoes.Controllers
             return View();
         }
 
+[PermissoesFilters]
+        public ActionResult AssistirAulaMp3(int idCurso, int idModulo, int idAula)
+        {
+            string caminhoArquivo = new CursoRepository().PegarCaminhoDoArquivoMp3(idCurso, idModulo, idAula);
+            ViewBag.caminhoArquivo = caminhoArquivo;
+            return View();
+        }
     }
 }
