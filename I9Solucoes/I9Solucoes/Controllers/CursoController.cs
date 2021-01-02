@@ -53,5 +53,72 @@ namespace I9Solucoes.Controllers
             ViewBag.caminhoArquivo = caminhoArquivo;
             return View();
         }
+
+[PermissoesFilters]
+        public ActionResult Inscrever(int idCurso)
+        {
+            Curso curso = new CursoRepository().Buscar(idCurso);
+            ViewBag.idCurso = curso.Id;
+            ViewBag.tempoDuracao = curso.TempoPrevistoDuracao;
+            ViewBag.dataInicial = curso.DataInicio;
+            ViewBag.valorMonetario = curso.ValorMonetario;
+            List<TempoCobrancaCurso> tempoCobranca = new CursoRepository().BuscarTempoCobranca(idCurso);
+            ViewBag.tempoCobranca = tempoCobranca.ToList();
+            return View();
+                    }
+
+        [HttpPost]
+        public JsonResult InscreverNoCurso()
+        {
+                        var idCurso = Convert.ToInt32(Request.Form["idCurso"]);
+            HttpCookie cookieLogin = Request.Cookies["login"];
+            var idAluno = new UsuarioRepository().PesquisarIdDoAlunoPeloEmail(cookieLogin.Value.ToString());
+            var idTempoAssinatura=Convert.ToInt32(Request.Form["tempoAssinatura"]);
+            int tempo= new CursoRepository().BuscarTempoDoCurso(idTempoAssinatura, idCurso);
+            DateTime dataInicio = new CursoRepository().Buscar(idCurso).DataInicio;
+            var dataFim=dataInicio.AddMonths(tempo);
+            Erro erro = new Erro();
+            try
+            {
+                bool existeAluno = new CursoRepository().ChecarSeAlunoJaEstarInscritoNoCurso(idAluno, idCurso);
+                if (existeAluno)
+                {
+                    erro.ExisteErro = true;
+                    erro.Detalhe = null;
+                    erro.Mensagem = "Você já está inscrito neste curso.";
+                }
+                else
+                {
+                    bool alunoInserido = new CursoRepository().InserirAlunoNoCurso(idCurso, idAluno, dataFim);
+                    if (alunoInserido)
+                    {
+                        erro.Mensagem = "Inscrição realizada com sucesso!";
+                        erro.Detalhe = null;
+                        erro.ExisteErro = false;
+                    }
+                    else
+                    {
+                        erro.ExisteErro = true;
+                        erro.Detalhe = null;
+                        erro.Mensagem = "Erro ao realizar inscrição no curso.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                erro.Mensagem = "Erro ao realizar cadastro " + ex.Message;
+                erro.Detalhe = ex.Message;
+                erro.ExisteErro = true;
+            }
+
+            return Json(erro, JsonRequestBehavior.AllowGet);
+        }
+
+[PermissoesFilters]
+        public ActionResult TodosOsCursos()
+        {
+            return View();
+        }
+        
     }
 }

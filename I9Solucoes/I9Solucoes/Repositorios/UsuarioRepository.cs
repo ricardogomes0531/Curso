@@ -41,5 +41,24 @@ namespace I9Solucoes.Repositorios
 
 			return retorno;
 		}
+
+		public int PesquisarIdDoAlunoPeloEmail(string email)
+		{
+			int idAluno = 0;
+			SqlCommand query = new SqlCommand("select * from dbo.usuario where email=@email", _conexao);
+			_conexao.Open();
+			SqlParameter parametroEmail = new SqlParameter();
+			parametroEmail.ParameterName = "@email";
+			parametroEmail.SqlDbType = SqlDbType.VarChar;
+			parametroEmail.Value = email;
+
+			query.Parameters.Add(parametroEmail);
+
+			SqlDataReader dados = query.ExecuteReader();
+			if (dados.Read())
+				idAluno = dados.GetInt32(dados.GetOrdinal("id"));
+			return idAluno;
+		}
+
 	}
 }

@@ -192,8 +192,8 @@ namespace I9Solucoes.Repositorios
 					IdCurso = dados.GetInt32(dados.GetOrdinal("IdCurso")),
 					Liberado = dados.GetString(dados.GetOrdinal("SnLiberado")),
 					NomeCurso = dados.GetString(dados.GetOrdinal("Nome")),
-					 DataFim=dados.GetDateTime(dados.GetOrdinal("DataFim")),
-					  DataInicio=dados.GetDateTime(dados.GetOrdinal("DataInicio"))
+					DataFim = dados.GetDateTime(dados.GetOrdinal("DataFim")),
+					DataInicio = dados.GetDateTime(dados.GetOrdinal("DataInicio"))
 				};
 				cursos.Add(curso);
 			};
@@ -333,6 +333,190 @@ namespace I9Solucoes.Repositorios
 			if (dado.Read())
 				caminhoArquivo = dado.GetString(dado.GetOrdinal("CaminhoArquivo"));
 			return caminhoArquivo;
+		}
+
+		public bool InserirAlunoNoCurso(int idCurso, int idAluno, string snLiberado, DateTime dataFim)
+		{
+			bool resultado = false;
+			SqlCommand comando = new SqlCommand("insert into aluno_curso(idcurso, idaluno, snliberado, datacadastro, datafim) values(@idCurso, @idAluno, @snLiberado, @dataCadastro, @dataFim)", _conexao);
+			_conexao.Open();
+			SqlParameter parametroIdCurso = new SqlParameter()
+			{
+				ParameterName = "@idCurso",
+				SqlDbType = SqlDbType.Int,
+				Value = idCurso
+			};
+			SqlParameter parametroIdAluno = new SqlParameter()
+			{
+				ParameterName = "@idAluno",
+				SqlDbType = SqlDbType.Int,
+				Value = idAluno
+			};
+			SqlParameter parametroSnLiberado = new SqlParameter()
+			{
+				ParameterName = "@snLiberado",
+				SqlDbType = SqlDbType.VarChar,
+				Value = "n"
+			};
+			SqlParameter parametroDataCadastro = new SqlParameter()
+			{
+				ParameterName = "@dataCadastro",
+				SqlDbType = SqlDbType.Date,
+				Value = DateTime.Now
+			};
+			SqlParameter parametroDataFim = new SqlParameter()
+			{
+				ParameterName = "@dataFim",
+				SqlDbType = SqlDbType.DateTime,
+				Value = DateTime.Now
+			};
+			comando.Parameters.Add(parametroIdCurso);
+			comando.Parameters.Add(parametroIdAluno);
+			comando.Parameters.Add(parametroSnLiberado);
+			comando.Parameters.Add(parametroDataCadastro);
+			comando.Parameters.Add(parametroDataFim);
+			if (comando.ExecuteNonQuery() > 0)
+				resultado = true;
+			return resultado;
+		}
+
+		public List<TempoCobrancaCurso> BuscarTempoCobranca(int idCurso)
+		{
+			List<TempoCobrancaCurso> tempoCobranca = new List<TempoCobrancaCurso>();
+			SqlCommand comando = new SqlCommand("select * from dbo.tempo_cobranca_curso where idCurso=@idCurso", _conexao);
+			_conexao.Open();
+			SqlParameter parametroIdCurso = new SqlParameter()
+			{
+				ParameterName = "@idCurso",
+				SqlDbType = SqlDbType.Int,
+				Value = idCurso
+			};
+			comando.Parameters.Add(parametroIdCurso);
+			SqlDataReader dado = comando.ExecuteReader();
+			while (dado.Read())
+			{
+				TempoCobrancaCurso tempo = new TempoCobrancaCurso()
+				{
+					Id = dado.GetInt32(dado.GetOrdinal("id")),
+					IdCurso = dado.GetInt32(dado.GetOrdinal("idCurso")),
+					Tempo = dado.GetString(dado.GetOrdinal("tempo")),
+					Valor = dado.GetDecimal(dado.GetOrdinal("valor"))
+				};
+				tempoCobranca.Add(tempo);
+			}
+			return tempoCobranca;
+		}
+
+		public bool InserirAlunoNoCurso(int idCurso, int idAluno, DateTime dataFim)
+		{
+			bool alunoInserido = false;
+			SqlCommand query = new SqlCommand("insert into aluno_curso(idcurso, idaluno, snliberado, datacadastro, datafim) values(@idCurso, @idAluno,@snLiberado, @dataCadastro, @dataFim)", _conexao);
+			_conexao.Open();
+
+			SqlParameter parametroIdCurso = new SqlParameter()
+			{
+				ParameterName = "@idCurso",
+				SqlDbType = SqlDbType.Int,
+				Value = idCurso
+			};
+
+			SqlParameter parametroIdAluno = new SqlParameter()
+			{
+				ParameterName = "@idAluno",
+				SqlDbType = SqlDbType.Int,
+				Value = idAluno
+			};
+
+			SqlParameter parametroSnLiberado = new SqlParameter()
+			{
+				ParameterName = "@snLiberado",
+				SqlDbType = SqlDbType.Char,
+				Value = "n"
+			};
+
+			SqlParameter parametroDataCadastro = new SqlParameter()
+			{
+				ParameterName = "@dataCadastro",
+				SqlDbType = SqlDbType.Date,
+				Value = DateTime.Now
+			};
+
+			SqlParameter parametroDataFim = new SqlParameter()
+			{
+				ParameterName = "@dataFim",
+				SqlDbType = SqlDbType.Date,
+				Value = dataFim
+			};
+
+			query.Parameters.Add(parametroIdCurso);
+			query.Parameters.Add(parametroIdAluno);
+			query.Parameters.Add(parametroSnLiberado);
+			query.Parameters.Add(parametroDataCadastro);
+			query.Parameters.Add(parametroDataFim);
+			if (query.ExecuteNonQuery() > 0)
+				alunoInserido = true;
+
+			return alunoInserido;
+		}
+
+		public int BuscarTempoDoCurso(int idCobranca, int idCurso)
+		{
+			int totalTempoCobranca = 0;
+			SqlCommand comando = new SqlCommand("select tempo from dbo.tempo_cobranca_curso where idCurso=@idCurso and id=@idCobranca", _conexao);
+			_conexao.Open();
+			SqlParameter parametroIdCurso = new SqlParameter()
+			{
+				ParameterName = "@idCurso",
+				SqlDbType = SqlDbType.Int,
+				Value = idCurso
+			};
+
+			SqlParameter parametroIdCobranca = new SqlParameter()
+			{
+				ParameterName = "@idCobranca",
+				SqlDbType = SqlDbType.Int,
+				Value = idCobranca
+			};
+
+			comando.Parameters.Add(parametroIdCurso);
+			comando.Parameters.Add(parametroIdCobranca);
+
+			SqlDataReader dado = comando.ExecuteReader();
+			if (dado.Read())
+			{
+				totalTempoCobranca = Convert.ToInt32(dado.GetString(dado.GetOrdinal("tempo")));
+			}
+			return totalTempoCobranca;
+		}
+
+		public bool ChecarSeAlunoJaEstarInscritoNoCurso(int idAluno, int idCurso)
+		{
+			bool alunoInscrito = false;
+			SqlCommand query = new SqlCommand("select count(*) as total from dbo.aluno_curso where idCurso=@idCurso and idAluno=@idAluno", _conexao);
+			_conexao.Open();
+
+			SqlParameter parametroIdAluno = new SqlParameter()
+			{
+				ParameterName = "@idAluno",
+				SqlDbType = SqlDbType.Int,
+				Value = idAluno
+			};
+
+			SqlParameter parametroIdCurso = new SqlParameter()
+			{
+				ParameterName = "@idCurso",
+				SqlDbType = SqlDbType.Int,
+				Value = idCurso
+			};
+			query.Parameters.Add(parametroIdAluno);
+			query.Parameters.Add(parametroIdCurso);
+			SqlDataReader dados = query.ExecuteReader();
+			if (dados.Read())
+			{
+				if (dados.GetInt32(dados.GetOrdinal("total")) > 0)
+					alunoInscrito = true;
+			}
+			return alunoInscrito;
 		}
 
 	}

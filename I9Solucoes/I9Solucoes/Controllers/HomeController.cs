@@ -55,5 +55,10 @@ namespace I9Solucoes.Controllers
 			return View(cursos);
 		}
 
+		public ActionResult Login()
+		{
+			return View();
+		}
+
 	}
 }

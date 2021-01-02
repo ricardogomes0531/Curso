@@ -9,7 +9,7 @@ namespace I9Solucoes.Filtro
         {
             if (HttpContext.Current.Request.Cookies["login"] == null)
             {
-                filterContext.HttpContext.Response.Redirect("~/Home/Index");
+                filterContext.HttpContext.Response.Redirect("~/Home/Login");
             }
         }
     }

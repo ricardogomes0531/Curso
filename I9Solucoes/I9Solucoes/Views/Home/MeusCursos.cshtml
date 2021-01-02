@@ -1,6 +1,6 @@
 ﻿@model List<I9Solucoes.Models.CursoAluno>
 @{
-	Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "~/Views/Shared/_LayoutEspecifico.cshtml";
 }
 <section>
 <div class="row">
@@ -15,9 +15,9 @@
 				<p class="text-lead">
 					<b>Nome do curso: @cursos.NomeCurso</b>
 					<br />
-					<b>Iniciado em: @cursos.DataCadastro</b>
+					<b>Iniciado em: @cursos.DataCadastro.ToString("dd/MM/yyyy")</b>
 					<br />
-					@if (DateTime.Now >= cursos.DataInicio)
+					@if (DateTime.Compare(DateTime.Now,cursos.DataInicio)>=0 && DateTime.Compare(DateTime.Now,cursos.DataFim)<=0)
 					{
 						<a href="/Curso/?idCurso=@cursos.IdCurso">Ir para o curso</a>
 					}
@@ -27,7 +27,7 @@
 				}
 					@if (DateTime.Now > cursos.DataFim)
 					{
-						<p class="text-lead">O curso já encerrou.</p>
+						<p class="text-lead">O curso encerrou em @cursos.DataFim.ToString("dd/MM/yyyy") e hoje é @DateTime.Now</p>
 					}
 
 					</p>

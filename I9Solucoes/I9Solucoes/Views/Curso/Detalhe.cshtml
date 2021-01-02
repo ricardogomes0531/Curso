@@ -1,6 +1,6 @@
 ﻿@model I9Solucoes.Models.Curso
 @{
-	Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "~/Views/Shared/_LayoutEspecifico.cshtml";
 	}
 <section>
 	<div class="row">
@@ -25,7 +25,7 @@
 			@if (Model.AceitaMatricula)
 		{
 					<h1>Para realizar sua inscrição no curso, por favor clique no link a seguir</h1>
-			<a class="btn-link" href="">Realizar inscrição no curso</a>
+			<a class="btn-link" href="/curso/inscrever?idCUrso=@Model.Id">Realizar inscrição no curso</a>
 				}
 			else
 		{

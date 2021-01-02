@@ -1,6 +1,6 @@
 use I9Solucoes;
 	IF OBJECT_ID('dbo.usuario') is null
-create table Usuario(Nome varchar(50) not null, DataNascimento date not null, Cpf varchar(14) not null, Sexo varchar(8) not null, Email varchar(50) not null, Celular varchar(11) not null, Whatsapp varchar(3) not null, senha varchar(10))
+create table Usuario(Id int identity primary key, Nome varchar(50) not null, DataNascimento date not null, Cpf varchar(14) not null, Sexo varchar(8) not null, Email varchar(50) not null, Celular varchar(11) not null, Whatsapp varchar(3) not null, senha varchar(10))
 	IF OBJECT_ID('dbo.curso') is null
 create table curso(Id int identity primary key, Nome varchar(50) not null, DataCadastro date not null, TempoPrevistoDuracao int not null, Descricao varchar(100) not null, Explicacao varchar(1000) not null, Ativo bit not null, AceitaMatricula bit not null, DataInicio date, ValorMonetario decimal not null)
 --insere curso
@@ -22,7 +22,15 @@ create table aula_modulo_curso(Id int identity primary key, IdCurso int, IdModul
 insert into aula_modulo_curso(idcurso, idmodulo, Nome, conteudoaula, caminhoarquivo) values(1, 1, 'Aula 01', 'PHP é uma linguagem de programação interpretada.', '')
 insert into aula_modulo_curso(idcurso, idmodulo, Nome, conteudoaula, caminhoarquivo) values((select c.id from dbo.curso c where c.nome='lógica de programação para deficientes visuais'), 6, 'Aula 01', null, 'audio.mp3')
 
+
+	IF OBJECT_ID('dbo.tempo_cobranca_curso') is null
+create table tempo_cobranca_curso(Id int identity primary key, idCurso int, tempo char(3), valor decimal)
+insert into dbo.tempo_cobranca_curso(idCurso, tempo, valor) values(1, '3', '100.00')
+insert into dbo.tempo_cobranca_curso(idCurso, tempo, valor) values(1, '6', '500.00')
+
+
 	IF OBJECT_ID('dbo.produto') is null
+
 create table produto(Id int identity primary key,  IdFornecedor int not null, DataCadastro date not null, DataAlteracao date, UsuarioCadastro varchar(50) not null, UsuarioAlteracao varchar(50), EstoqueMinimo int, DataValidade date, Custo decimal not null, CustoVenda decimal not null, PrazoEntregaFornecedor int, Localizacao varchar(200), Marca varchar(50),
 constraint cnt_fornecedor_produto foreign key(IdFornecedor) references fornecedor(Id))
 

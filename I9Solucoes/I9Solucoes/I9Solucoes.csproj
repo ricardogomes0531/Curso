@@ -133,6 +133,7 @@
     <Compile Include="Models\Erro.cs" />
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\Modulos.cs" />
+    <Compile Include="Models\TempoCobrancaCurso.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\CadastroRepository.cs" />
     <Compile Include="Repositorios\ClienteRepository.cs" />
@@ -158,6 +159,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\cadastro\Cadastro.js" />
+    <Content Include="Scripts\Curso\Curso.js" />
     <Content Include="Scripts\Fornecedor\fornecedor.js" />
     <Content Include="Scripts\global.js" />
     <Content Include="Scripts\Home\home.js" />
@@ -198,6 +200,10 @@
     <Content Include="Views\Curso\ListarAulas.cshtml" />
     <Content Include="Views\Curso\AssistirAula.cshtml" />
     <Content Include="Views\Curso\AssistirAulaMp3.cshtml" />
+    <Content Include="Views\Curso\Inscrever.cshtml" />
+    <Content Include="Views\Shared\_LayoutEspecifico.cshtml" />
+    <Content Include="Views\Curso\TodosOsCursos.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
