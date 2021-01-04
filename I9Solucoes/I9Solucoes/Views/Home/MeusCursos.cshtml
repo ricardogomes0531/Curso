@@ -17,7 +17,7 @@
 					<br />
 					<b>Iniciado em: @cursos.DataCadastro.ToString("dd/MM/yyyy")</b>
 					<br />
-					@if (DateTime.Compare(DateTime.Now,cursos.DataInicio)>=0 && DateTime.Compare(DateTime.Now,cursos.DataFim)<=0)
+					@if (DateTime.Now < cursos.DataFim && DateTime.Now > cursos.DataInicio)
 					{
 						<a href="/Curso/?idCurso=@cursos.IdCurso">Ir para o curso</a>
 					}
@@ -27,7 +27,7 @@
 				}
 					@if (DateTime.Now > cursos.DataFim)
 					{
-						<p class="text-lead">O curso encerrou em @cursos.DataFim.ToString("dd/MM/yyyy") e hoje é @DateTime.Now</p>
+						<p class="text-lead">O curso encerrou em @cursos.DataFim.ToString("dd/MM/yyyy")</p>
 					}
 
 					</p>

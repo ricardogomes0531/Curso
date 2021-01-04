@@ -5,6 +5,7 @@ using System.Web;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using I9Solucoes.Models;
 
 namespace I9Solucoes.Repositorios
 {
@@ -58,6 +59,28 @@ namespace I9Solucoes.Repositorios
 			if (dados.Read())
 				idAluno = dados.GetInt32(dados.GetOrdinal("id"));
 			return idAluno;
+		}
+
+		public PerfilUsuario PegarDadosDoUsuario(string email)
+		{
+			PerfilUsuario usuario = new PerfilUsuario();
+			SqlCommand query = new SqlCommand("select u.nome, u.email, (select count(idCurso) from dbo.aluno_curso ac where ac.idAluno=u.id) as totalCursos from dbo.usuario u where email=@email", _conexao);
+			_conexao.Open();
+			SqlParameter parametroEmail = new SqlParameter();
+			parametroEmail.ParameterName = "@email";
+			parametroEmail.SqlDbType = SqlDbType.VarChar;
+			parametroEmail.Value = email;
+
+			query.Parameters.Add(parametroEmail);
+
+			SqlDataReader dados = query.ExecuteReader();
+			if (dados.Read())
+			{
+				usuario.Email = dados.GetString(dados.GetOrdinal("email"));
+				usuario.Nome = dados.GetString(dados.GetOrdinal("nome"));
+				usuario.TotalDeCursos = dados.GetInt32(dados.GetOrdinal("totalCursos"));
+			}
+			return usuario;
 		}
 
 	}

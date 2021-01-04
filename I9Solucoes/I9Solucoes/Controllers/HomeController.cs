@@ -51,13 +51,20 @@ namespace I9Solucoes.Controllers
 		{
 			List<CursoAluno> cursos = new List<CursoAluno>();
 			HttpCookie cookieLogin = Request.Cookies["login"];
-			cursos = new CursoRepository().ListarCursosDoAluno(cookieLogin.Value.ToString());
+					cursos = new CursoRepository().ListarCursosDoAluno(cookieLogin.Value.ToString());
 			return View(cursos);
 		}
 
 		public ActionResult Login()
 		{
 			return View();
+		}
+
+		public ActionResult DadosLogin()
+		{
+			HttpCookie cookieLogin = Request.Cookies["login"];
+			PerfilUsuario usuario = new UsuarioRepository().PegarDadosDoUsuario(cookieLogin.Value.ToString());
+			return View(usuario);
 		}
 
 	}
