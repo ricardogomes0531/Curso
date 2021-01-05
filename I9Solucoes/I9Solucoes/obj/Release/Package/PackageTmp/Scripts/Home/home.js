@@ -1,4 +1,19 @@
-﻿$(document).ready(function () {
+﻿function converteDataJsonParaJavascript(value) {
+    if (value == null)
+        return null;
+    var dataTexto = value.replace('/', '').replace('/', '').replace('Date', '').replace('(', '').replace(')', '');
+    var date = new Date(parseInt(dataTexto));
+    var dia = date.getDate();
+    var mes = date.getMonth() + 1;
+    var ano = date.getFullYear();
+    if (mes != 10 && mes != 11 && mes != 12) {
+        mes = "0" + mes;
+    }
+
+    return dia + "/" + mes + "/" + ano;
+};
+
+$(document).ready(function () {
     $.ajax({
         type: 'GET',
         url: '/Home/Cursos',
@@ -16,10 +31,10 @@
             for (var dados in data) {
                 html += "<td>" + data[dados].Nome + "</td>";
                 html += "<td>" + data[dados].Descricao + "</td>";
-                html += "<td>" + data[dados].TempoPrevistoDuracao + "< Meses/td>";
-                html += "<td>" + data[dados].DataInicio + "</td>";
-                html += "<td><a href=''>Saber Mais Informações</a></td>";
-                html += "<td><a href=''>Inscrever-se</a></td>";
+                html += "<td>" + data[dados].TempoPrevistoDuracao + " Meses</td>";
+                html += "<td>" + converteDataJsonParaJavascript(data[dados].DataInicio) + "</td>";
+                html += "<td><a href='/Curso/Detalhe?id="+data[dados].Id+"'>Saber Mais Informações</a></td>";
+                html += "<td><a href='/Curso/Inscrever?idCurso="+data[dados].Id+"'>Inscrever-se neste curso</a></td>";
             }
             html += "</tr></tbody></table>";
             $("#cursos").html(html);

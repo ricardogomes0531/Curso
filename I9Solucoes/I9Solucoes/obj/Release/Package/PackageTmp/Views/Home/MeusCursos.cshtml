@@ -1,0 +1,43 @@
+﻿@model List<I9Solucoes.Models.CursoAluno>
+@{
+	Layout = "~/Views/Shared/_LayoutEspecifico.cshtml";
+}
+<section>
+<div class="row">
+	<div class="col-lg-3">
+		<h1>Meus Cursos</h1>
+	</div>
+	<div class="col-lg-8">
+		@if (Model.Count() > 0)
+		{
+			foreach (var cursos in Model.ToList())
+			{
+				<p class="text-lead">
+					<b>Nome do curso: @cursos.NomeCurso</b>
+					<br />
+					<b>Iniciado em: @cursos.DataCadastro.ToString("dd/MM/yyyy")</b>
+					<br />
+					@if (DateTime.Now < cursos.DataFim && DateTime.Now > cursos.DataInicio)
+					{
+						<a href="/Curso/?idCurso=@cursos.IdCurso">Ir para o curso</a>
+					}
+					@if (DateTime.Now < cursos.DataInicio)
+					{
+					<p class="text-lead">O curso ainda não iniciou. A data de início é @cursos.DataInicio.ToString("dd/mm/yyyy")</p>
+				}
+					@if (DateTime.Now > cursos.DataFim)
+					{
+						<p class="text-lead">O curso encerrou em @cursos.DataFim.ToString("dd/MM/yyyy")</p>
+					}
+
+					</p>
+				}
+			}
+			else
+			{
+				<p class="text-lead">Você ainda não está incrito em nenhum curso.</p>
+			}
+	</div>
+</div>
+</section>
+<hr>

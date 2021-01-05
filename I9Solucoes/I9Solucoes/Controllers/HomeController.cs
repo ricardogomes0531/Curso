@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using I9Solucoes.Repositorios;
 using I9Solucoes.Models;
 using I9Solucoes.Filtro;
+using System.Configuration;
 
 namespace I9Solucoes.Controllers
 {
@@ -13,7 +14,7 @@ namespace I9Solucoes.Controllers
 	{
 		public ActionResult Index()
 		{
-			ViewBag.totalVisitantesOnline = System.Web.HttpContext.Current.Application["totalVisitantesOnline"];
+						ViewBag.totalVisitantesOnline = System.Web.HttpContext.Current.Application["totalVisitantesOnline"];
 						return View();
 		}
 
@@ -67,5 +68,18 @@ namespace I9Solucoes.Controllers
 			return View(usuario);
 		}
 
+		public ActionResult Sair()
+		{
+			HttpCookie cookieLogin = new HttpCookie("login");
+			//cookieLogin.Secure = true;
+			cookieLogin.Value = string.Empty;
+			Response.Cookies.Add(cookieLogin);
+return RedirectToAction("Index");
+		}
+
+		public ActionResult RedefinirSenha()
+		{
+			return View();
+		}
 	}
 }

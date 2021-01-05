@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using I9Solucoes.Repositorios;
 using I9Solucoes.Models;
+using System.Configuration;
 
 namespace I9Solucoes.Controllers
 {
@@ -30,6 +31,7 @@ namespace I9Solucoes.Controllers
                     erro.Mensagem = "Cadastro realizado com sucesso";
                     erro.Detalhe = null;
                     erro.ExisteErro =false;
+                    Mail.Enviar(Request.Form["email"].ToString(),"Cadastro no Portal Visão de DEV", ConfigurationManager.AppSettings["MailMensagemBemVindo"].ToString());
                 }
                 else
                 {

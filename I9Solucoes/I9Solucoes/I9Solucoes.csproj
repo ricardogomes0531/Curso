@@ -127,6 +127,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mail.cs" />
     <Compile Include="Models\Aulas.cs" />
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\CursoAluno.cs" />
@@ -206,6 +207,8 @@
     <Content Include="Views\Curso\TodosOsCursos.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\DadosLogin.cshtml" />
+    <Content Include="Views\Home\RedefinirSenha.cshtml" />
+    <Content Include="Views\Home\Sair.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
