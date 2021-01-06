@@ -32,6 +32,7 @@ namespace I9Solucoes.Controllers
                     erro.Detalhe = null;
                     erro.ExisteErro =false;
                     Mail.Enviar(Request.Form["email"].ToString(),"Cadastro no Portal Visão de DEV", ConfigurationManager.AppSettings["MailMensagemBemVindo"].ToString());
+                    Mail.Enviar(ConfigurationManager.AppSettings["MailEmailAdministrador"].ToString(),"Cadastro de Novo Aluno no Site Visão de DEV","Um novo aluno(a) se cadastrou no site Visão de DEV. O e-mail é "+Request.Form["email"].ToString()+" o nome é "+Request.Form["nome"].ToString()+" o celular cadastrado é: "+Request.Form["celular"].ToString()+", é whatsapp: "+Request.Form["whatsapp"].ToString());
                 }
                 else
                 {
