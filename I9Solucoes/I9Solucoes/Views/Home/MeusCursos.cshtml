@@ -18,6 +18,8 @@
 					<b>Início em: @cursos.DataInicio.ToString("dd/MM/yyyy")</b>
 					<br />
 					<b>Matrícula realizada em: @cursos.DataCadastro.ToString("dd/MM/yyyy")</b>
+<br>
+					<b>Data de encerramento: @cursos.DataFim.ToString("dd/MM/yyyy")</b>
 					@if (DateTime.Now < cursos.DataFim && DateTime.Now > cursos.DataInicio)
 					{
 						<a href="/Curso/?idCurso=@cursos.IdCurso">Ir para o curso</a>

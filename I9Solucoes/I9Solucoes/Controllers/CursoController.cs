@@ -89,7 +89,7 @@ namespace I9Solucoes.Controllers
                 }
                 else
                 {
-                    bool alunoInserido = new CursoRepository().InserirAlunoNoCurso(idCurso, idAluno, dataFim);
+                    bool alunoInserido = new CursoRepository().InserirAlunoNoCurso(idCurso, idAluno, dataFim,dataInicio);
                     if (alunoInserido)
                     {
                         erro.Mensagem = "Inscrição realizada com sucesso!";

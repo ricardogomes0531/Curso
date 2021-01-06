@@ -174,7 +174,7 @@ namespace I9Solucoes.Repositorios
 		public List<CursoAluno> ListarCursosDoAluno(string email)
 		{
 			List<CursoAluno> cursos = new List<CursoAluno>();
-			SqlCommand query = new SqlCommand("select c.Nome, ac.SnLiberado, ac.DataCadastro, ac.IdCurso, c.DataInicio, ac.Datafim from curso c, aluno_curso ac, usuario u where c.id=ac.IdCurso and ac.IdAluno=u.id and u.email=@email", _conexao);
+			SqlCommand query = new SqlCommand("select c.Nome, ac.SnLiberado, ac.DataCadastro, ac.IdCurso, ac.DataInicio, ac.Datafim from curso c, aluno_curso ac, usuario u where c.id=ac.IdCurso and ac.IdAluno=u.id and u.email=@email", _conexao);
 			_conexao.Open();
 			SqlParameter parametroEmail = new SqlParameter()
 			{
@@ -407,10 +407,10 @@ namespace I9Solucoes.Repositorios
 			return tempoCobranca;
 		}
 
-		public bool InserirAlunoNoCurso(int idCurso, int idAluno, DateTime dataFim)
+		public bool InserirAlunoNoCurso(int idCurso, int idAluno, DateTime dataFim, DateTime dataInicio)
 		{
 			bool alunoInserido = false;
-			SqlCommand query = new SqlCommand("insert into aluno_curso(idcurso, idaluno, snliberado, datacadastro, datafim) values(@idCurso, @idAluno,@snLiberado, @dataCadastro, @dataFim)", _conexao);
+			SqlCommand query = new SqlCommand("insert into aluno_curso(idcurso, idaluno, snliberado, datacadastro, datafim, datainicio) values(@idCurso, @idAluno,@snLiberado, @dataCadastro, @dataFim, @dataInicio)", _conexao);
 			_conexao.Open();
 
 			SqlParameter parametroIdCurso = new SqlParameter()
@@ -447,12 +447,19 @@ namespace I9Solucoes.Repositorios
 				SqlDbType = SqlDbType.Date,
 				Value = dataFim
 			};
+			SqlParameter parametroDataInicio = new SqlParameter()
+			{
+				ParameterName = "@dataInicio",
+				SqlDbType = SqlDbType.Date,
+				Value = dataInicio
+			};
 
 			query.Parameters.Add(parametroIdCurso);
 			query.Parameters.Add(parametroIdAluno);
 			query.Parameters.Add(parametroSnLiberado);
 			query.Parameters.Add(parametroDataCadastro);
 			query.Parameters.Add(parametroDataFim);
+			query.Parameters.Add(parametroDataInicio);
 			if (query.ExecuteNonQuery() > 0)
 				alunoInserido = true;
 
