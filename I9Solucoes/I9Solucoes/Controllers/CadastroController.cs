@@ -39,6 +39,7 @@ namespace I9Solucoes.Controllers
                     erro.Mensagem = "Erro ao realizar o cadastro.";
                     erro.Detalhe = null;
                     erro.ExisteErro = true;
+                    Mail.Enviar(ConfigurationManager.AppSettings["MailEmailAdministrador"].ToString(),"Erro no Cadastro de Novo Aluno no Site Visão de DEV","Um novo aluno(a) obteve um erro ao se cadastrar no site Visão de DEV. O e-mail é "+Request.Form["email"].ToString()+" o nome é "+Request.Form["nome"].ToString()+" o celular cadastrado é: "+Request.Form["celular"].ToString()+", é whatsapp: "+Request.Form["whatsapp"].ToString()+" a data de nascimento é: "+Request.Form["dataNascimento"].ToString());
                 }
             }
             catch (Exception ex)
@@ -46,6 +47,7 @@ namespace I9Solucoes.Controllers
                 erro.Mensagem = "Erro ao realizar cadastro " + ex.Message;
                 erro.Detalhe = ex.Message;
                 erro.ExisteErro = true;
+                    Mail.Enviar(ConfigurationManager.AppSettings["MailEmailAdministrador"].ToString(),"Erro no Cadastro de Novo Aluno no Site Visão de DEV",erro.Detalhe);
             }
                         return Json(erro, JsonRequestBehavior.AllowGet);
         }
