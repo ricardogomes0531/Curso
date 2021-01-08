@@ -226,10 +226,10 @@ namespace I9Solucoes.Repositorios
 			return modulos;
 		}
 
-		public List<Aulas> ListarAulasDoModulo(int idCurso, int idModulo)
+		public List<Aulas> ListarAulasDoModulo(int idCurso, int idModulo, int idAluno)
 		{
 			List<Aulas> aulas = new List<Aulas>();
-			SqlCommand query = new SqlCommand("select Id, IdCurso, IdModulo, Nome, ConteudoAula, CaminhoArquivo from aula_modulo_curso where IdCurso=@idCurso and IdModulo=@idModulo", _conexao);
+			SqlCommand query = new SqlCommand("select ac.Id, ac.IdCurso, ac.IdModulo, ac.Nome, ac.ConteudoAula, ac.CaminhoArquivo, (select count(*) from aluno_frequencia f where f.idcurso=ac.idcurso and f.idmodulo=ac.idmodulo and f.idaula=ac.id and f.idaluno=@idAluno) as frequencia from aula_modulo_curso ac where ac.IdCurso=@idCurso and ac.IdModulo=@idModulo", _conexao);
 			_conexao.Open();
 			SqlParameter parametroIdCurso = new SqlParameter()
 			{
@@ -243,9 +243,16 @@ namespace I9Solucoes.Repositorios
 				SqlDbType = SqlDbType.Int,
 				Value = idModulo
 			};
+			SqlParameter parametroIdAluno = new SqlParameter()
+			{
+				ParameterName = "@idAluno",
+				SqlDbType = SqlDbType.Int,
+				Value = idAluno
+			};
 
 			query.Parameters.Add(parametroIdCurso);
 			query.Parameters.Add(parametroIdModulo);
+			query.Parameters.Add(parametroIdAluno);
 			SqlDataReader dados = query.ExecuteReader();
 			while (dados.Read())
 			{
@@ -256,7 +263,8 @@ namespace I9Solucoes.Repositorios
 					Id = dados.GetInt32(dados.GetOrdinal("Id")),
 					IdCurso = dados.GetInt32(dados.GetOrdinal("IdCurso")),
 					IdModulo = dados.GetInt32(dados.GetOrdinal("IdModulo")),
-					Nome = dados.GetString(dados.GetOrdinal("Nome"))
+					Nome = dados.GetString(dados.GetOrdinal("Nome")),
+					 Frequencia=dados.GetInt32(dados.GetOrdinal("frequencia"))
 				};
 				aulas.Add(aula);
 			};

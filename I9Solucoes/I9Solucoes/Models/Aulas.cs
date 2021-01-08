@@ -13,5 +13,6 @@ namespace I9Solucoes.Models
 		public string Nome { get; set; }
 		public string ConteudoAula { get; set; }
 		public string CaminhoArquivo { get; set; }
+public int Frequencia { get; set; }
 	}
 }

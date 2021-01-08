@@ -34,7 +34,9 @@ namespace I9Solucoes.Controllers
         public ActionResult ListarAulas(int idCurso, int idModulo)
         {
             List<Aulas> aulas = new List<Aulas>();
-            aulas = new CursoRepository().ListarAulasDoModulo(idCurso, idModulo);
+            HttpCookie cookieLogin = Request.Cookies["login"];
+            var idAluno = new UsuarioRepository().PesquisarIdDoAlunoPeloEmail(cookieLogin.Value.ToString());
+            aulas = new CursoRepository().ListarAulasDoModulo(idCurso, idModulo, idAluno);
             return View(aulas);
         }
 
