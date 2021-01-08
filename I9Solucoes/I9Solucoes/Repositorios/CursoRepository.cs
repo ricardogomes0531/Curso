@@ -525,6 +525,95 @@ namespace I9Solucoes.Repositorios
 			}
 			return alunoInscrito;
 		}
+		
+		public bool InserirFrequencia(int idCurso, int idModulo, int idAula, int idAluno)
+		{
+			bool resultado = false;
+			SqlCommand comando = new SqlCommand("insert into aluno_frequencia(idcurso,idmodulo,idaula, idaluno, datacadastro) values(@idCurso, @idModulo, @idAula, @idAluno, @dataCadastro)", _conexao);
+			_conexao.Open();
+			SqlParameter parametroIdCurso = new SqlParameter()
+			{
+				ParameterName = "@idCurso",
+				SqlDbType = SqlDbType.Int,
+				Value = idCurso
+			};
+
+			SqlParameter parametroIdModulo = new SqlParameter()
+			{
+				ParameterName = "@idModulo",
+				SqlDbType = SqlDbType.Int,
+				Value = idModulo
+			};
+
+			SqlParameter parametroIdAula = new SqlParameter()
+			{
+				ParameterName = "@idAula",
+				SqlDbType = SqlDbType.Int,
+				Value = idAula
+			};
+
+			SqlParameter parametroIdAluno = new SqlParameter()
+			{
+				ParameterName = "@idAluno",
+				SqlDbType = SqlDbType.Int,
+				Value = idAluno
+			};
+			SqlParameter parametroDataCadastro = new SqlParameter()
+			{
+				ParameterName = "@dataCadastro",
+				SqlDbType = SqlDbType.Date,
+				Value = DateTime.Now
+			};
+			comando.Parameters.Add(parametroIdCurso);
+			comando.Parameters.Add(parametroIdModulo);
+			comando.Parameters.Add(parametroIdAula);
+			comando.Parameters.Add(parametroIdAluno);
+			comando.Parameters.Add(parametroDataCadastro);
+			if (comando.ExecuteNonQuery() > 0)
+				resultado = true;
+			return resultado;
+		}
+		
+		public bool RemoverFrequencia(int idCurso, int idModulo, int idAula, int idAluno)
+		{
+			bool resultado = false;
+			SqlCommand comando = new SqlCommand("delete from aluno_frequencia where idcurso=@idCurso and idmodulo=@idModulo and idaula=@idAula and idaluno=@idAluno", _conexao);
+			_conexao.Open();
+			SqlParameter parametroIdCurso = new SqlParameter()
+			{
+				ParameterName = "@idCurso",
+				SqlDbType = SqlDbType.Int,
+				Value = idCurso
+			};
+
+			SqlParameter parametroIdModulo = new SqlParameter()
+			{
+				ParameterName = "@idModulo",
+				SqlDbType = SqlDbType.Int,
+				Value = idModulo
+			};
+
+			SqlParameter parametroIdAula = new SqlParameter()
+			{
+				ParameterName = "@idAula",
+				SqlDbType = SqlDbType.Int,
+				Value = idAula
+			};
+
+			SqlParameter parametroIdAluno = new SqlParameter()
+			{
+				ParameterName = "@idAluno",
+				SqlDbType = SqlDbType.Int,
+				Value = idAluno
+			};
+			comando.Parameters.Add(parametroIdCurso);
+			comando.Parameters.Add(parametroIdModulo);
+			comando.Parameters.Add(parametroIdAula);
+			comando.Parameters.Add(parametroIdAluno);
+			if (comando.ExecuteNonQuery() > 0)
+				resultado = true;
+			return resultado;
+		}
 
 	}
 }

@@ -34,3 +34,6 @@ insert into dbo.tempo_cobranca_curso(idCurso, tempo, valor) values(1, '6', '500.
 create table produto(Id int identity primary key,  IdFornecedor int not null, DataCadastro date not null, DataAlteracao date, UsuarioCadastro varchar(50) not null, UsuarioAlteracao varchar(50), EstoqueMinimo int, DataValidade date, Custo decimal not null, CustoVenda decimal not null, PrazoEntregaFornecedor int, Localizacao varchar(200), Marca varchar(50),
 constraint cnt_fornecedor_produto foreign key(IdFornecedor) references fornecedor(Id))
 
+	IF OBJECT_ID('dbo.aluno_frequencia') is null
+create table aluno_frequencia(Id int identity primary key, IdCurso int, IdModulo int, IdAula int, IdAluno int, DataCadastro datetime)
+

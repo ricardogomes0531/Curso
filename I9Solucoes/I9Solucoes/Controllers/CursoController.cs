@@ -43,6 +43,10 @@ namespace I9Solucoes.Controllers
         {
             string conteudoAula = new CursoRepository().MostrarConteudoDaAula(idCurso, idModulo, idAula);
             ViewBag.conteudoAula = conteudoAula;
+            HttpCookie cookieLogin = Request.Cookies["login"];
+            var idAluno = new UsuarioRepository().PesquisarIdDoAlunoPeloEmail(cookieLogin.Value.ToString());
+new CursoRepository().RemoverFrequencia(idCurso, idModulo, idAula, idAluno);
+                new CursoRepository().InserirFrequencia(idCurso, idModulo, idAula, idAluno);
             return View();
         }
 
@@ -51,6 +55,10 @@ namespace I9Solucoes.Controllers
         {
             string caminhoArquivo = new CursoRepository().PegarCaminhoDoArquivoMp3(idCurso, idModulo, idAula);
             ViewBag.caminhoArquivo = caminhoArquivo;
+            HttpCookie cookieLogin = Request.Cookies["login"];
+            var idAluno = new UsuarioRepository().PesquisarIdDoAlunoPeloEmail(cookieLogin.Value.ToString());
+ new CursoRepository().RemoverFrequencia(idCurso, idModulo, idAula, idAluno);
+                new CursoRepository().InserirFrequencia(idCurso, idModulo, idAula, idAluno);
             return View();
         }
 
