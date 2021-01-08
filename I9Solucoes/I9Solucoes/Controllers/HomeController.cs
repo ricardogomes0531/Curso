@@ -81,5 +81,18 @@ return RedirectToAction("Index");
 		{
 			return View();
 		}
+
+		[HttpPost]
+		public ActionResult RecuperarSenha()
+		{
+			var email = Request.Form["email"].ToString();
+			string senha = new UsuarioRepository().PesquisarSenhaDoAlunoPeloEmail(email);
+			if (!string.IsNullOrEmpty(senha))
+			{
+				var mensagem = $"Prezado(a) aluno(a), você solicitou sua senha ao portal. Seu e-mail foi devidamente localizado, por isso estamos disponibilizando para você sua senha de acesso. A senha é: {senha}";
+				Mail.Enviar(email, "Recuperação de Senha", mensagem);
+			}
+			return View();
+		}
 	}
 }

@@ -83,5 +83,23 @@ namespace I9Solucoes.Repositorios
 			return usuario;
 		}
 
+				public string PesquisarSenhaDoAlunoPeloEmail(string email)
+		{
+			string senha = string.Empty;
+			SqlCommand query = new SqlCommand("select senha from dbo.usuario where email=@email", _conexao);
+			_conexao.Open();
+			SqlParameter parametroEmail = new SqlParameter();
+			parametroEmail.ParameterName = "@email";
+			parametroEmail.SqlDbType = SqlDbType.VarChar;
+			parametroEmail.Value = email;
+
+			query.Parameters.Add(parametroEmail);
+
+			SqlDataReader dados = query.ExecuteReader();
+			if (dados.Read())
+				senha = dados.GetString(dados.GetOrdinal("senha"));
+			return senha;
+		}
+		
 	}
 }

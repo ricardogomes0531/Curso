@@ -209,6 +209,7 @@
     <Content Include="Views\Home\DadosLogin.cshtml" />
     <Content Include="Views\Home\RedefinirSenha.cshtml" />
     <Content Include="Views\Home\Sair.cshtml" />
+    <Content Include="Views\Home\RecuperarSenha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
