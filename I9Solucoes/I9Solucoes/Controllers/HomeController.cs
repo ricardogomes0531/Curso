@@ -94,5 +94,10 @@ return RedirectToAction("Index");
 			}
 			return View();
 		}
+
+		public ActionResult Sobre()
+		{
+			return View();
+		}
 	}
 }
