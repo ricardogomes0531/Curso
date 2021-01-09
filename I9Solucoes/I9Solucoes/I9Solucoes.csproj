@@ -129,6 +129,7 @@
     </Compile>
     <Compile Include="Mail.cs" />
     <Compile Include="Models\Aulas.cs" />
+    <Compile Include="Models\CanalYoutube.cs" />
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\CursoAluno.cs" />
     <Compile Include="Models\Erro.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Models\TempoCobrancaCurso.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\CadastroRepository.cs" />
+    <Compile Include="Repositorios\CanalYoutube.cs" />
     <Compile Include="Repositorios\ClienteRepository.cs" />
     <Compile Include="Repositorios\CursoRepository.cs" />
     <Compile Include="Repositorios\DataBase.cs" />
@@ -146,7 +148,6 @@
     <Compile Include="Repositorios\UsuarioRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\audio.mp3" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -158,6 +159,7 @@
     <Content Include="Repositorios\Database\Script Database i9.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\cadastro\Cadastro.js" />
@@ -211,6 +213,7 @@
     <Content Include="Views\Home\Sair.cshtml" />
     <Content Include="Views\Home\RecuperarSenha.cshtml" />
     <Content Include="Views\Home\Sobre.cshtml" />
+    <Content Include="Views\Home\ListarVideos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -57,14 +57,11 @@ senha: senha
 },
         success: function (data) {
 if (data.ExisteErro)
-{$("#alerta").html("<span>"+data.mensagem+"</span>")}
+{$("#alerta").html("<span>"+data.Mensagem+"</span>")}
 else
 {
-                swal({
-                    title: "Êxito",
-                    text: data.Mensagem,
-                    icon: "info"
-                }).then(() => { document.location.href = "/Home"; });
+alert(data.Mensagem);
+document.location.href="/home";
             }
 
 

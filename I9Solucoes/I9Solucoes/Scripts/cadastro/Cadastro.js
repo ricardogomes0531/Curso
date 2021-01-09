@@ -39,7 +39,8 @@ return;}
 else if (confirmarSenha=="")
 {$("#alerta").html("<span>Preencher a confirmação da senha.</span>");
 return;}
-
+$("#alerta").html("<span>Aguarde enquanto cadastramos você...</span>");
+$("#btnSalvar").prop("disabled",true);
     $.ajax({
         type: 'POST',
         url: "/Cadastro/Salvar",
@@ -57,7 +58,8 @@ senha: senha
 },
         success: function (data) {
 if (data.ExisteErro)
-{$("#alerta").html("<span>"+data.Mensagem+"</span>")}
+{$("#alerta").html("<span>"+data.Mensagem+"</span>");
+$("#btnSalvar").prop("disabled",false);}
 else
 {
 alert(data.Mensagem);

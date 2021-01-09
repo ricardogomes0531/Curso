@@ -99,5 +99,11 @@ return RedirectToAction("Index");
 		{
 			return View();
 		}
+
+		public ActionResult ListarVideos()
+		{
+			List<CanalYoutube> canal = new CanalYoutubeRepository().ListarVideos();
+			return View(canal);
+		}
 	}
 }

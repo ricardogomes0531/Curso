@@ -16,10 +16,18 @@
 				if (string.IsNullOrEmpty(aulas.CaminhoArquivo))
 				{
 					<li class="list-group-item"><a class="btn-link" href="/Curso/AssistirAula/?idModulo=@aulas.IdModulo&idCurso=@aulas.IdCurso&idAula=@aulas.Id">@aulas.Nome</a></li>
+					if (aulas.Frequencia > 0)
+					{
+						<b>Assistida</b>
+					}
 				}
 				else
 				{
 					<li class="list-group-item"><a class="btn-link" href="/Curso/AssistirAulaMp3/?idModulo=@aulas.IdModulo&idCurso=@aulas.IdCurso&idAula=@aulas.Id">@aulas.Nome</a></li>
+					if (aulas.Frequencia > 0)
+					{
+						<b>Assistida</b>
+					}
 				}
 			}
 		}

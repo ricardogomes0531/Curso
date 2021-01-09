@@ -14,6 +14,7 @@
 };
 
 $(document).ready(function () {
+$("#canalYoutube").load("/home/ListarVideos");
     $.ajax({
         type: 'GET',
         url: '/Home/Cursos',
