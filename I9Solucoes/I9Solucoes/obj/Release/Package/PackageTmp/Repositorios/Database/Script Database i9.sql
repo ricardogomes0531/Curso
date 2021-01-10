@@ -24,7 +24,7 @@ insert into aula_modulo_curso(idcurso, idmodulo, Nome, conteudoaula, caminhoarqu
 
 
 	IF OBJECT_ID('dbo.tempo_cobranca_curso') is null
-create table tempo_cobranca_curso(Id int identity primary key, idCurso int, tempo char(3), valor decimal)
+create table tempo_cobranca_curso(Id int identity primary key, idCurso int, tempo char(3), valor decimal, LinkPagamento varchar(500))
 insert into dbo.tempo_cobranca_curso(idCurso, tempo, valor) values(1, '3', '100.00')
 insert into dbo.tempo_cobranca_curso(idCurso, tempo, valor) values(1, '6', '500.00')
 
@@ -39,3 +39,11 @@ create table aluno_frequencia(Id int identity primary key, IdCurso int, IdModulo
 
 	IF OBJECT_ID('dbo.canal') is null
 create table canal(Id int identity primary key, Titulo varchar(100), Descricao varchar(100), Link Varchar(100))
+insert into dbo.canal(titulo, descricao, link) values('Criando Primeira Aplicação no Padrão MVC Utilizando ASP.Net','','https://www.youtube.com/watch?v=E0B1-sj5m7U&t=1474s')
+insert into dbo.canal(titulo, descricao, link) values('Criando Aplicação Olá Mundo com ASP.Net MVC','','https://www.youtube.com/watch?v=rKiwq8P0fW0&t=625s')
+insert into dbo.canal(titulo, descricao, link) values('Trabalhando com Classes no ASP.Net Utilizando C#','','https://www.youtube.com/watch?v=fSfBbTUSnco&t=2s')
+insert into dbo.canal(titulo, descricao, link) values('Trabalhando com Requisições em API de Forma Acessível Utilizando o CURL','','https://www.youtube.com/watch?v=1wbnp4A8_CY&t=790s')
+insert into dbo.canal(titulo, descricao, link) values('Instalando o Linux no Windows com Acessibilidade','','https://www.youtube.com/watch?v=qpJ5Jg-zUws&t=18s')
+insert into dbo.canal(titulo, descricao, link) values('Instalando o Banco de Dados MySQL no Linux com Acessibilidade','','https://www.youtube.com/watch?v=nHH9Q2fZeUg&t=759s')
+insert into dbo.canal(titulo, descricao, link) values('Restrição com Constraint no MySQL','','https://www.youtube.com/watch?v=qkSxwUHg1kc&t=577s')
+insert into dbo.canal(titulo, descricao, link) values('Entenda Tudo Sobre Normalização em Banco de Dados, para que Você Nunca Mais Tenha Dúvida','','https://www.youtube.com/watch?v=d8EYwgneoOI&t=945s')

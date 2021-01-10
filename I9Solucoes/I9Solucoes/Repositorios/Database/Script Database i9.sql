@@ -24,7 +24,7 @@ insert into aula_modulo_curso(idcurso, idmodulo, Nome, conteudoaula, caminhoarqu
 
 
 	IF OBJECT_ID('dbo.tempo_cobranca_curso') is null
-create table tempo_cobranca_curso(Id int identity primary key, idCurso int, tempo char(3), valor decimal)
+create table tempo_cobranca_curso(Id int identity primary key, idCurso int, tempo char(3), valor decimal, LinkPagamento varchar(500))
 insert into dbo.tempo_cobranca_curso(idCurso, tempo, valor) values(1, '3', '100.00')
 insert into dbo.tempo_cobranca_curso(idCurso, tempo, valor) values(1, '6', '500.00')
 

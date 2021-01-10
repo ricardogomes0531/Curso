@@ -10,6 +10,7 @@ namespace I9Solucoes.Models
 				public string Liberado { get; set; }
 		public DateTime DataInicio { get; set; }
 		public DateTime DataFim { get; set; }
+		public string LinkPagamento { get; set; }
 
 	}
 }

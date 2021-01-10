@@ -174,7 +174,7 @@ namespace I9Solucoes.Repositorios
 		public List<CursoAluno> ListarCursosDoAluno(string email)
 		{
 			List<CursoAluno> cursos = new List<CursoAluno>();
-			SqlCommand query = new SqlCommand("select c.Nome, ac.SnLiberado, ac.DataCadastro, ac.IdCurso, ac.DataInicio, ac.Datafim from curso c, aluno_curso ac, usuario u where c.id=ac.IdCurso and ac.IdAluno=u.id and u.email=@email", _conexao);
+			SqlCommand query = new SqlCommand("select c.Nome, ac.SnLiberado, ac.DataCadastro, ac.IdCurso, ac.DataInicio, ac.Datafim, t.linkpagamento from curso c, aluno_curso ac, usuario u, tempo_cobranca_curso t where c.id=ac.IdCurso and ac.IdAluno=u.id and t.idcurso=ac.idcurso and u.email=@email", _conexao);
 			_conexao.Open();
 			SqlParameter parametroEmail = new SqlParameter()
 			{
@@ -193,7 +193,8 @@ namespace I9Solucoes.Repositorios
 					Liberado = dados.GetString(dados.GetOrdinal("SnLiberado")),
 					NomeCurso = dados.GetString(dados.GetOrdinal("Nome")),
 					DataFim = dados.GetDateTime(dados.GetOrdinal("DataFim")),
-					DataInicio = dados.GetDateTime(dados.GetOrdinal("DataInicio"))
+					DataInicio = dados.GetDateTime(dados.GetOrdinal("DataInicio")),
+LinkPagamento=dados.GetString(dados.GetOrdinal("LinkPagamento"))
 				};
 				cursos.Add(curso);
 			};
@@ -617,6 +618,30 @@ namespace I9Solucoes.Repositorios
 			comando.Parameters.Add(parametroIdCurso);
 			comando.Parameters.Add(parametroIdModulo);
 			comando.Parameters.Add(parametroIdAula);
+			comando.Parameters.Add(parametroIdAluno);
+			if (comando.ExecuteNonQuery() > 0)
+				resultado = true;
+			return resultado;
+		}
+
+		public bool LiberarCursoParaAluno(int idCurso, int idAluno)
+		{
+			bool resultado = false;
+			SqlCommand comando = new SqlCommand("update dbo.aluno_curso set snliberado='s' where idcurso=@idcurso and idaluno=@idaluno", _conexao);
+			_conexao.Open();
+			SqlParameter parametroIdCurso = new SqlParameter()
+			{
+				ParameterName = "@idCurso",
+				SqlDbType = SqlDbType.Int,
+				Value = idCurso
+			};
+			SqlParameter parametroIdAluno = new SqlParameter()
+			{
+				ParameterName = "@idAluno",
+				SqlDbType = SqlDbType.Int,
+				Value = idAluno
+			};
+			comando.Parameters.Add(parametroIdCurso);
 			comando.Parameters.Add(parametroIdAluno);
 			if (comando.ExecuteNonQuery() > 0)
 				resultado = true;
