@@ -13,7 +13,7 @@ Para realizar seu cadastro em nossa plataforma, será necessário preencher os d
 Com isso, você poderá matricular-se nos cursos aqui oferecidos.
 </blockquote>
 </div>
-<form id="formCadastro">
+<form id="formCadastro" name="formCadastro">
 <div class="row">
 <div class="col-md-6">
 <div class="form-group">
@@ -22,7 +22,7 @@ Com isso, você poderá matricular-se nos cursos aqui oferecidos.
 </div>
 <div class="form-group">
 <label for="dataNascimento">Data de nascimento:</label>
-<input type="text" id="dataNascimento" name="dataNascimento" placeholder="formato dia/mês/ano" required>
+<input type="text" id="dataNascimento" name="dataNascimento" placeholder="formato dia/mês/ano" required onKeyPress="completaData()">
 </div>
 <div class="form-group">
 <label for="cpf">CPF (apenas números):</label>
@@ -64,7 +64,7 @@ Com isso, você poderá matricular-se nos cursos aqui oferecidos.
 </div>
 </div>
 </div>
-<input class="btn" type="button" id="btnSalvar" onClick="salvar()">Salvar</button>
+<input class="btn" type="button" id="btnSalvar" onClick="salvar()" value="Salvar" />
 </form>
 		</div>
 </section>

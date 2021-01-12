@@ -130,6 +130,11 @@ new CursoRepository().RemoverFrequencia(idCurso, idModulo, idAula, idAluno);
             return View();
         }
         
+        public ActionResult Cursos()
+        {
+            return View();
+        }
+
         public ActionResult LiberarCurso(int idCurso, int idAluno)
         {
                                     bool liberado = new CursoRepository().LiberarCursoParaAluno(idCurso, idAluno);

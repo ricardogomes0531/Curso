@@ -30,6 +30,8 @@
 			<b>Liberado: Não</b>
 			<a href="@cursos.LinkPagamento" target="_blank">Você pode pagar o curso clicando aqui</a>
 <br>
+<b>Você irá pagar, conforme a assinatura escolhida, o valor de R$@cursos.Valor</b>
+<br>
 			<b>OBS: Você será redirecionado para outro site para efetivar o pagamento.</b>
 			}
 						@if (DateTime.Now < cursos.DataFim && DateTime.Now > cursos.DataInicio && cursos.Liberado == "s")
