@@ -8,7 +8,7 @@ insert into curso (nome, datacadastro, tempoprevistoduracao, descricao, explicac
 values('Lógica de programação para Deficientes Visuais', getdate(), 3, 'Curso prático de lógica de programação com php', 'Curso onde a 	pessoa cega aprenderá sem todo aquele sofrimento, os conceitos com prática aplicada.', 1, 1, '01-11-2020', '300.00')
 
 	IF OBJECT_ID('dbo.aluno_curso') is null
-create table aluno_curso(Id int identity primary key, IdCurso int, IdAluno int, SnLiberado varchar(1), DataCadastro datetime, DataFim date, DataInicio date)
+create table aluno_curso(Id int identity primary key, IdCurso int, IdAluno int, SnLiberado varchar(1), DataCadastro datetime, DataFim date, DataInicio date, IdTempoAssinatura int)
 insert into aluno_curso(idcurso, idaluno, snliberado, datacadastro, datafim) values(1,2,'s',getdate(), '01-02-2021');
 
 	IF OBJECT_ID('dbo.modulo_curso') is null

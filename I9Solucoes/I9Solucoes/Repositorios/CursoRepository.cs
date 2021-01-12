@@ -174,7 +174,7 @@ namespace I9Solucoes.Repositorios
 		public List<CursoAluno> ListarCursosDoAluno(string email)
 		{
 			List<CursoAluno> cursos = new List<CursoAluno>();
-			SqlCommand query = new SqlCommand("select c.Nome, ac.SnLiberado, ac.DataCadastro, ac.IdCurso, ac.DataInicio, ac.Datafim, t.linkpagamento from curso c, aluno_curso ac, usuario u, tempo_cobranca_curso t where c.id=ac.IdCurso and ac.IdAluno=u.id and t.idcurso=ac.idcurso and u.email=@email", _conexao);
+			SqlCommand query = new SqlCommand("select c.Nome, ac.SnLiberado, ac.DataCadastro, ac.IdCurso, ac.DataInicio, ac.Datafim, t.linkpagamento, t.valor from curso c, aluno_curso ac, usuario u, tempo_cobranca_curso t where c.id=ac.IdCurso and ac.IdAluno=u.id and t.idcurso=ac.idcurso and t.id=ac.idtempoassinatura and u.email=@email", _conexao);
 			_conexao.Open();
 			SqlParameter parametroEmail = new SqlParameter()
 			{
@@ -194,7 +194,8 @@ namespace I9Solucoes.Repositorios
 					NomeCurso = dados.GetString(dados.GetOrdinal("Nome")),
 					DataFim = dados.GetDateTime(dados.GetOrdinal("DataFim")),
 					DataInicio = dados.GetDateTime(dados.GetOrdinal("DataInicio")),
-LinkPagamento=dados.GetString(dados.GetOrdinal("LinkPagamento"))
+LinkPagamento=dados.GetString(dados.GetOrdinal("LinkPagamento")),
+ Valor=dados.GetDecimal(dados.GetOrdinal("Valor"))
 				};
 				cursos.Add(curso);
 			};
@@ -379,6 +380,7 @@ LinkPagamento=dados.GetString(dados.GetOrdinal("LinkPagamento"))
 				SqlDbType = SqlDbType.DateTime,
 				Value = DateTime.Now
 			};
+
 			comando.Parameters.Add(parametroIdCurso);
 			comando.Parameters.Add(parametroIdAluno);
 			comando.Parameters.Add(parametroSnLiberado);
@@ -416,10 +418,10 @@ LinkPagamento=dados.GetString(dados.GetOrdinal("LinkPagamento"))
 			return tempoCobranca;
 		}
 
-		public bool InserirAlunoNoCurso(int idCurso, int idAluno, DateTime dataFim, DateTime dataInicio)
+		public bool InserirAlunoNoCurso(int idCurso, int idAluno, DateTime dataFim, DateTime dataInicio, int idTempoAssinatura)
 		{
 			bool alunoInserido = false;
-			SqlCommand query = new SqlCommand("insert into aluno_curso(idcurso, idaluno, snliberado, datacadastro, datafim, datainicio) values(@idCurso, @idAluno,@snLiberado, @dataCadastro, @dataFim, @dataInicio)", _conexao);
+			SqlCommand query = new SqlCommand("insert into aluno_curso(idcurso, idaluno, snliberado, datacadastro, datafim, datainicio, idtempoassinatura) values(@idCurso, @idAluno,@snLiberado, @dataCadastro, @dataFim, @dataInicio, @idTempoAssinatura)", _conexao);
 			_conexao.Open();
 
 			SqlParameter parametroIdCurso = new SqlParameter()
@@ -462,6 +464,12 @@ LinkPagamento=dados.GetString(dados.GetOrdinal("LinkPagamento"))
 				SqlDbType = SqlDbType.Date,
 				Value = dataInicio
 			};
+			SqlParameter parametroIdTempoAssinatura = new SqlParameter()
+			{
+				ParameterName = "@idTempoAssinatura",
+				SqlDbType = SqlDbType.Int,
+				Value = idTempoAssinatura
+			};
 
 			query.Parameters.Add(parametroIdCurso);
 			query.Parameters.Add(parametroIdAluno);
@@ -469,6 +477,7 @@ LinkPagamento=dados.GetString(dados.GetOrdinal("LinkPagamento"))
 			query.Parameters.Add(parametroDataCadastro);
 			query.Parameters.Add(parametroDataFim);
 			query.Parameters.Add(parametroDataInicio);
+			query.Parameters.Add(parametroIdTempoAssinatura);
 			if (query.ExecuteNonQuery() > 0)
 				alunoInserido = true;
 

@@ -99,7 +99,7 @@ new CursoRepository().RemoverFrequencia(idCurso, idModulo, idAula, idAluno);
                 }
                 else
                 {
-                    bool alunoInserido = new CursoRepository().InserirAlunoNoCurso(idCurso, idAluno, dataFim,dataInicio);
+                    bool alunoInserido = new CursoRepository().InserirAlunoNoCurso(idCurso, idAluno, dataFim,dataInicio,idTempoAssinatura);
                     if (alunoInserido)
                     {
                         erro.Mensagem = "Inscrição realizada com sucesso!";

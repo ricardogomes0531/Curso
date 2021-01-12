@@ -71,3 +71,12 @@ document.location.href="/home";
     });
 
 }
+
+function completaData(){
+var dataNascimento=document.formCadastro.dataNascimento.value.length;
+if (dataNascimento==2)
+{document.formCadastro.dataNascimento.value=document.formCadastro.dataNascimento.value+"/"}
+else
+if (dataNascimento==5)
+{document.formCadastro.dataNascimento.value=document.formCadastro.dataNascimento.value+"/"}
+}

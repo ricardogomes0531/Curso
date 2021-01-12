@@ -11,6 +11,7 @@ namespace I9Solucoes.Models
 		public DateTime DataInicio { get; set; }
 		public DateTime DataFim { get; set; }
 		public string LinkPagamento { get; set; }
+		public decimal Valor { get; set; }
 
 	}
 }
