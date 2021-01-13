@@ -14,7 +14,7 @@ tempoAssinatura: tempoAssinatura
         success: function (data) {
 if (!data.ExisteErro)
 {
-$("#alerta").html("<h2>"+data.Mensagem+"</h2>");
+$("#alerta").html("<h2>"+data.Mensagem+"</h2><br><a href='/home/meuscursos'>Ir para meus cursos</a>");
 $("#inscricao").hidd();}
 else
 {
