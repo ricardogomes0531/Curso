@@ -35,7 +35,14 @@ $("#canalYoutube").load("/home/ListarVideos");
                 html += "<td>" + data[dados].TempoPrevistoDuracao + " Meses</td>";
                 html += "<td>" + converteDataJsonParaJavascript(data[dados].DataInicio) + "</td>";
                 html += "<td><a href='/Curso/Detalhe?id="+data[dados].Id+"'>Saber Mais Informações</a></td>";
+if (data[dados].AceitaMatricula)
+{
                 html += "<td><a href='/Curso/Inscrever?idCurso="+data[dados].Id+"'>Inscrever-se neste curso</a></td>";
+}
+else
+{
+                html += "<td>Não existem turmas abertas para este curso no momento.</td>";
+}
             }
             html += "</tr></tbody></table>";
             $("#cursos").html(html);
